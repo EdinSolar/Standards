@@ -307,7 +307,9 @@ Please don't use things like ``vps_t``.
 
 It's a _mistake_ to use typedef for structures and pointers. When you see a
 
+```C
 	vps_t a;
+```
 
 in the source, what does it mean?
 
@@ -439,7 +441,7 @@ The rationale for using gotos is:
     modifications are prevented
 - saves the compiler work to optimise redundant code away ;)
 
-&nbsp;
+
 ```C
 int fun(int a)
 {
@@ -584,7 +586,7 @@ And of course _all_ classes should have separate header and definition
 ```C++
 class MPU6000 {
 	public:
-                void init();
+		void init();
 		int getX;
 		int getY;
 		int getZ;
@@ -595,7 +597,7 @@ class MPU6000 {
 		int temperature;
 		...
 	protected:
-        	...
+		...
 	}
 ```
 
