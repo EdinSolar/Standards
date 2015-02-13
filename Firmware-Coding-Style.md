@@ -44,6 +44,7 @@ The preferred way to ease multiple indentation levels in a switch statement is
 to align the "switch" and its subordinate "case" labels in the same column
 instead of "double-indenting" the "case" labels.  E.g.:
 
+```C
         switch (suffix) {
         case 'G':
         case 'g':
@@ -60,13 +61,15 @@ instead of "double-indenting" the "case" labels.  E.g.:
         default:
                 break;
         }
-
+```
 
 Don't put multiple statements on a single line unless you have
 something to hide:
 
-        if (condition) do_this;
-          do_something_everytime;
+```C
+    if (condition) do_this;
+      do_something_everytime;
+```
 
 Don't put multiple assignments on a single line either.  Kernel coding style
 is super simple.  Avoid tricky expressions.
@@ -75,13 +78,15 @@ Given different editors are different, use tas for indentation. This way heretic
 can set tabs to be 4 spaces and won't screw over the entire codebase. Do what
 EMACS does - tabs for indent, spaces for context and alignment:
 
-	char* str = "This is a multiline\n
-	             string with tabs & spaces.";
+```C
+char* str = "This is a multiline\n
+             string with tabs & spaces.";
+```
 
 Get a decent editor and don't leave whitespace at the end of lines.
 
 
-		Chapter 2: Breaking long lines and strings
+##Chapter 2: Breaking long lines and strings
 
 Coding style is all about readability and maintainability using commonly
 available tools.
@@ -107,31 +112,37 @@ choose one placement strategy over the other, but the preferred way, as
 shown to us by the prophets Kernighan and Ritchie, is to put the opening
 brace last on the line, and put the closing brace first, thusly:
 
-	if (x is true) {
-		we do y
-	}
+```C
+if (x is true) {
+	we do y
+}
+```
 
 This applies to all non-function statement blocks (if, switch, for,
 while, do).  E.g.:
 
-	switch (action) {
-	case KOBJ_ADD:
-		return "add";
-	case KOBJ_REMOVE:
-		return "remove";
-	case KOBJ_CHANGE:
-		return "change";
-	default:
-		return NULL;
-	}
+```C
+switch (action) {
+case KOBJ_ADD:
+	return "add";
+case KOBJ_REMOVE:
+	return "remove";
+case KOBJ_CHANGE:
+	return "change";
+default:
+	return NULL;
+}
+```
 
 However, there is one special case, namely functions: they have the
 opening brace at the beginning of the next line, thus:
 
-	int function(int x)
-	{
-		body of function
-	}
+```C
+int function(int x)
+{
+	body of function
+}
+```
 
 Heretic people all over the world have claimed that this inconsistency
 is ...  well ...  inconsistent, but all right-thinking people know that
@@ -143,20 +154,21 @@ the cases where it is followed by a continuation of the same statement,
 ie a "while" in a do-statement or an "else" in an if-statement, like
 this:
 
-	do {
-		body of do-loop
-	} while (condition);
-
+```C
+do {
+	body of do-loop
+} while (condition);
+```
 and
-
-	if (x == y) {
-		..
-	} else if (x > y) {
-		...
-	} else {
-		....
-	}
-
+```C
+if (x == y) {
+	..
+} else if (x > y) {
+	...
+} else {
+	....
+}
+```
 Rationale: K&R.
 
 Also, note that this brace-placement also minimizes the number of empty
@@ -167,25 +179,29 @@ comments on.
 
 Do not unnecessarily use braces where a single statement will do.
 
-	if (condition)
-		action();
-
+```C
+if (condition)
+	action();
+```
 and
-
-	if (condition)
-		do_this();
-	else
-		do_that();
+```C
+if (condition)
+	do_this();
+else
+	do_that();
+```
 
 This does not apply if only one branch of a conditional statement is a single
 statement; in the latter case use braces in both branches:
 
-	if (condition) {
-		do_this();
-		do_that();
-	} else {
-		otherwise();
-	}
+```C
+if (condition) {
+	do_this();
+	do_that();
+} else {
+	otherwise();
+}
+```
 
 ##3.1:  Spaces
 
@@ -200,20 +216,26 @@ So use a space after these keywords:
 	``if``, ``switch``, ``case``, ``for``, ``do``, ``while``
 but not with ``sizeof``, ``typeof``, ``alignof``, or ``__attribute__``.  E.g.,
 	
-	s = sizeof(struct file);
+```C
+s = sizeof(struct file);
+```
 
 Do not add spaces around (inside) parenthesised expressions.  This example is
 *bad*:
 
-	s = sizeof( struct file );
+```C
+s = sizeof( struct file );
+```
 
 When declaring pointer data or a function that returns a pointer type, the
 preferred use of '*' is adjacent to the data name or function name and not
 adjacent to the type name.  Examples:
 
-	char *linux_banner;
-	unsigned long long memparse(char *ptr, char **retptr);
-	char *match_strdup(substring_t *s);
+```C
+char *linux_banner;
+unsigned long long memparse(char *ptr, char **retptr);
+char *match_strdup(substring_t *s);
+```
 
 Use one space around (on each side of) most binary and ternary operators,
 such as any of these:
@@ -291,7 +313,9 @@ in the source, what does it mean?
 
 In contrast, if it says
 
+```C
 	struct virtual_container *a;
+```
 
 you can actually tell what ``a`` is.
 
@@ -380,11 +404,13 @@ In source files, separate functions with one blank line.  If the function is
 exported, the ``EXPORT*`` macro for it should follow immediately after the closing
 function brace line.  E.g.:
 
-	int system_is_up(void)
-	{
-		return system_state == SYSTEM_RUNNING;
-	}
-	EXPORT_SYMBOL(system_is_up);
+```C
+int system_is_up(void)
+{
+	return system_state == SYSTEM_RUNNING;
+}
+EXPORT_SYMBOL(system_is_up);
+```
 
 In function prototypes, include parameter names with their data types.
 Although this is not required by the C language, it is preferred in Linux
@@ -414,36 +440,39 @@ The rationale for using gotos is:
 - saves the compiler work to optimise redundant code away ;)
 
 &nbsp;
+```C
+int fun(int a)
+{
+	int result = 0;
+	char *buffer;
 
-	int fun(int a)
-	{
-		int result = 0;
-		char *buffer;
+	buffer = malloc(SIZE, GFP_KERNEL);
+	if (!buffer)
+		return -ENOMEM;
 
-		buffer = malloc(SIZE, GFP_KERNEL);
-		if (!buffer)
-			return -ENOMEM;
-
-		if (condition1) {
-			while (loop1) {
-				...
-			}
-			result = 1;
-			goto out_buffer;
+	if (condition1) {
+		while (loop1) {
+			...
 		}
-		...
-			
-	out_buffer:
-		free(buffer);
-		return result;
+		result = 1;
+		goto out_buffer;
 	}
+	...
+	
+out_buffer:
+	free(buffer);
+	return result;
+}
+```
 
 A common type of bug to be aware of it "one err bugs" which look like this:
 
-	err:
-		free(foo->bar);
-		free(foo);
-		return ret;
+```C
+err:
+	free(foo->bar);
+	free(foo);
+	return ret;
+```
 
 The bug in this code is that on some exit paths ``foo`` is NULL.  Normally the
 fix for this is to split it up into two error labels ``err_bar:`` and ``err_foo:``.
@@ -470,6 +499,7 @@ Don't use C99-style ``// ...`` comments.
 
 The preferred style for long (multi-line) comments is:
 
+```C
 	/*
 	 * This is the preferred style for multi-line
 	 * comments in the Linux kernel source code.
@@ -478,6 +508,7 @@ The preferred style for long (multi-line) comments is:
 	 * Description:  A column of asterisks on the left side,
 	 * with beginning and ending almost-blank lines.
 	 */
+```
 
 It's also important to comment data, whether they are basic types or derived
 types.  To this end, use just one data declaration per line (no commas for
@@ -497,7 +528,7 @@ make a good program).
 So, you can either get rid of GNU emacs, or change it to use saner
 values.  To do the latter, you can stick the following in your .emacs file:
 
-<pre>
+```elisp
 (defun c-lineup-arglist-tabs-only (ignored)
   "Line up argument lists by tabs, not spaces"
   (let* ((anchor (c-langelem-pos c-syntactic-element))
@@ -516,7 +547,7 @@ values.  To do the latter, you can stick the following in your .emacs file:
                         (arglist-cont-nonempty
                          c-lineup-gcc-asm-reg
                          c-lineup-arglist-tabs-only))))))
-</pre>
+```
 
 This will make emacs go better with the kernel coding style for C
 files.
@@ -550,22 +581,23 @@ is also a shootable offence.
 And of course _all_ classes should have separate header and definition
 (cpp) files.
 
-	class MPU6000 {
-    	    public:
-        	        void init();
-            	    int getX;
-                	int getY;
-                	int getZ;
-                	int magnitude(int x, int y, int z);
-                	...
-        	private:
-            	    int chipselect_pin;
-                	int temperature;
-                	...
-        	protected:
-            	    ...
+```C++
+class MPU6000 {
+	public:
+                void init();
+		int getX;
+		int getY;
+		int getZ;
+		int magnitude(int x, int y, int z);
+		...
+	private:
+		int chipselect_pin;
+		int temperature;
+		...
+	protected:
+        	...
 	}
-
+```
 
 ##Chapter 11: Data structures
 
@@ -602,7 +634,9 @@ have a reference count on it, you almost certainly have a bug.
 
 Names of macros defining constants and labels in capitalized.
 
+```C
 	#define CONSTANT 0x12345
+```
 
 Enums are preferred when defining several related constants.
 
@@ -613,28 +647,34 @@ Generally, inline functions are preferable to macros resembling functions.
 
 Macros with multiple statements should be enclosed in a do - while block:
 
-	#define macrofun(a, b, c) 			\
-	do {					\
-		if (a == 5)			\
-			do_this(b, c);		\
-	} while (0)
+```C
+#define macrofun(a, b, c) 			\
+do {					\
+	if (a == 5)			\
+		do_this(b, c);		\
+} while (0)
+```
 
 Things to avoid when using macros:
 
 1. macros that affect control flow:
 
-		#define FOO(x)					\
-		do {					\
-			if (blah(x) < 0)		\
-				return -EBUGGERED;	\
-		} while(0)
+```C
+	#define FOO(x)					\
+	do {					\
+		if (blah(x) < 0)		\
+			return -EBUGGERED;	\
+	} while(0)
+```
 
 is a _very_ bad idea.  It looks like a function call but exits the "calling"
 function; don't break the internal parsers of those who will read the code.
 
 2. macros that depend on having a local variable with a magic name:
 
-		#define FOO(val) bar(index, val)
+```C
+	#define FOO(val) bar(index, val)
+```
 
 might look like a good thing, but it's confusing as hell when one reads the
 code and it's prone to breakage from seemingly innocent changes.
@@ -646,8 +686,10 @@ bite you if somebody e.g. turns FOO into an inline function.
 must enclose the expression in parentheses. Beware of similar issues with
 macros using parameters.
 
-		#define CONSTANT 0x4000
-		#define CONSTEXP (CONSTANT | 3)
+```C
+	#define CONSTANT 0x4000
+	#define CONSTEXP (CONSTANT | 3)
+```
 
 The cpp manual deals with macros exhaustively. The gcc internals manual also
 covers RTL which is used frequently with assembly language in the kernel.
@@ -680,7 +722,9 @@ the ones already enabled by DEBUG.
 
 The preferred form for passing a size of a struct is the following:
 
-	p = malloc(sizeof(*p), ...);
+```C
+p = malloc(sizeof(*p), ...);
+```
 
 The alternative form where struct name is spelled out hurts readability and
 introduces an opportunity for a bug when the pointer variable type is changed
@@ -760,11 +804,15 @@ you should use, rather than explicitly coding some variant of them yourself.
 For example, if you need to calculate the length of an array, take advantage
 of the macro
 
-		#define ARRAY_SIZE(x) (sizeof(x) / sizeof((x)[0]))
+```C
+#define ARRAY_SIZE(x) (sizeof(x) / sizeof((x)[0]))
+```
 
 Similarly, if you need to calculate the size of some structure member, use
 
-		#define FIELD_SIZEOF(t, f) (sizeof(((t*)0)->f))
+```C
+#define FIELD_SIZEOF(t, f) (sizeof(((t*)0)->f))
+```
 
 There are also min() and max() macros that do strict type checking if you
 need them.  Feel free to peruse that header file to see what else is already
@@ -777,19 +825,24 @@ Some editors can interpret configuration information embedded in source files,
 indicated with special markers.  For example, emacs interprets lines marked
 like this:
 
-	-*- mode: c -*-
-
+```C
+-*- mode: c -*-
+```
 Or like this:
 
-	/*
-	Local Variables:
-	compile-command: "gcc -DMAGIC_DEBUG_FLAG foo.c"
-	End:
-	*/
+```C
+/*
+Local Variables:
+compile-command: "gcc -DMAGIC_DEBUG_FLAG foo.c"
+End:
+*/
+```
 
 Vim interprets markers that look like this:
 
-	/* vim:set sw=8 noet */
+```C
+/* vim:set sw=8 noet */
+```
 
 Do not include any of these in source files.  People have their own personal
 editor configurations, and your source files should not override them.  This
@@ -822,10 +875,11 @@ instructions, put each instruction on a separate line in a separate quoted
 string, and end each string except the last with \n\t to properly indent the
 next instruction in the assembly output:
 
-	asm ("magic %reg1, #42\n\t"
-	     "more_magic %reg2, %reg3"
-	     : /* outputs */ : /* inputs */ : /* clobbers */);
-
+```C
+asm ("magic %reg1, #42\n\t"
+     "more_magic %reg2, %reg3"
+     : /* outputs */ : /* inputs */ : /* clobbers */);
+```
 
 ##Chapter 20: Conditional Compilation
 
@@ -852,10 +906,11 @@ At the end of any non-trivial #if or #ifdef block (more than a few lines),
 place a comment after the #endif on the same line, noting the conditional
 expression used.  For instance:
 
-	#ifdef CONFIG_SOMETHING
-	...
-	#endif /* CONFIG_SOMETHING */
-
+```C
+#ifdef CONFIG_SOMETHING
+...
+#endif /* CONFIG_SOMETHING */
+```
 
 
 #Appendix I: References
