@@ -13,5 +13,5 @@ Collection of style guides, standards and specifications for the whole project.
   .md [(markdown)](http://daringfireball.net/projects/markdown/syntax) and .tex (LaTeX)
 
 * Making big changes - please branch off a large change and then pull request it back
-  in to the Standards. THis lets everyone see all the changes and prevents confusion
+  in to the Standards. This lets everyone see all the changes and prevents confusion
   because people are on different versions.
