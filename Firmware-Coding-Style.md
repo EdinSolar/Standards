@@ -45,22 +45,22 @@ to align the "switch" and its subordinate "case" labels in the same column
 instead of "double-indenting" the "case" labels.  E.g.:
 
 ```C
-        switch (suffix) {
-        case 'G':
-        case 'g':
-                mem <<= 30;
-                break;
-        case 'M':
-        case 'm':
-                mem <<= 20;
-                break;
-        case 'K':
-        case 'k':
-                mem <<= 10;
-                /* fall through */
-        default:
-                break;
-        }
+switch (suffix) {
+case 'G':
+case 'g':
+        mem <<= 30;
+        break;
+case 'M':
+case 'm':
+        mem <<= 20;
+        break;
+case 'K':
+case 'k':
+        mem <<= 10;
+        /* fall through */
+default:
+        break;
+}
 ```
 
 Don't put multiple statements on a single line unless you have
@@ -598,7 +598,7 @@ class MPU6000 {
 		...
 	protected:
 		...
-	}
+}
 ```
 
 ##Chapter 11: Data structures
