@@ -15,3 +15,16 @@ Collection of style guides, standards and specifications for the whole project.
 * Making big changes - please branch off a large change and then pull request it back
   in to the Standards. This lets everyone see all the changes and prevents confusion
   because people are on different versions.
+
+
+# Summary
+
+### Programming
+
+* All C & C++ code will follow the Firmware coding style to a tee.
+* All Ruby code will use the Ruby Coding style as a guideline, with deviations allowed.
+
+### ElectroMechanical
+
+* All enclosures, connectors and powered devices should be:-
+  - Ideally IP 67 or IP 53 as a reccomended minimum. WSC regulations require IP XXD and IP XXB for some components

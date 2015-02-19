@@ -18,6 +18,21 @@ Also I'm going to immediately get this out of the way:
 * Executables do _not_ have an extension (no .o)
 
 
+##Chapter 0: Version Control & Code Review
+
+I don't need to say much on the reasoning behind using Git - it's pretty much
+a verboten standard nowadays anyway.
+
+Commit early and often, and use goddamn branches to make (big) changes - for a
+lot of the code in this project it is really important that strict rules and
+a safety mentality are applied to the firmware; I would prefer not to be 
+killed because the driver interface decided to misbehave and deviate from the
+driver's input into a tree.
+
+As for review, go Torvalds style and call out crap code. People's pull requests
+should, unless they're trivial, all be thouroughly assessed by more than one peer.
+
+
 ##Chapter 1: Indentation
 
 Tabs are 8 characters, and thus indentations are also 8 characters.
